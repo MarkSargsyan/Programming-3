@@ -13,7 +13,6 @@
   },
   "author": "MarkSargsyan",
   "license": "ISC",
-  "bugs": {
    
   "dependencies": {
     "express": "^4.16.2"
