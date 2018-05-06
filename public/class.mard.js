@@ -1,42 +1,28 @@
 class Mard {
 
 
-    constructor(x, y) {
+    constructor(x, y, ser) {
         this.x = x;
         this.y = y;
         this.energy = 5;
         this.directions = [];
+        this.ser = (ser == 0 ? "arakan" : "igakan");
+            if(ser == 0) {
+            this.ser = "arakan";
+         }else this.ser = "igakan";
     }
+    
 
 
-    stanalNorKordinatner() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-    }
+   stanalNorKordinatner(){
+    return super.stanalNorKordinatner();
+}
 
 
+    
     yntrelVandak(ch) {
-        this.stanalNorKordinatner();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == ch) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
-    }
+        return super.yntrelVandak(ch)
+    } 
 
     yntrelKerakuriVandak( xotakeriVandak) {
         this.stanalNorKordinatner();
@@ -119,14 +105,7 @@ class Mard {
           
             matrix[this.y][this.x] = 4;
 
-            //for(var i in gishatichArr){
-            //    var gishatich = gishatichArr[i];
-            //    if(gishatich.x == this.x && gishatich.y == this.y){
-            //        console.log("Y: " + this.y);
-            //        console.log("X: " + this.x);
-            //       // xotakerArr.splice(i,1);
-            //    }
-            //}
+           
 
 
 
@@ -137,6 +116,12 @@ class Mard {
     }
 
     bazmanal(){
+         if(this.ser == "arakan") {
+            var vandak = random(this.yntrelVandak(2.5));
+            if(vandak) {
+                var norVandak = random(this.yntrelVandak(0));
+            }
+        }
         var norMard = new Mard(this.x, this.y);
         mardArr.push(norMard);
         matrix[this.y][this.x] = 4;
@@ -146,13 +131,7 @@ class Mard {
         matrix[this.y][this.x] = 0;
         var index = mardArr.findIndex(item => item.y === this.y && item.x === this.x);
         mardArr.splice(index, 1);
-        //for(var i in gishatichArr){
-        //    var gishatichObj = gishatichArr[i];
-        //    if(gishatichObj.x == this.x && gishatichObj.y == this.y){
-        //        gishatichArr.splice(i, 1);
-        //        matrix[this.y][this.x] = 0;
-        //    }
-        //}
+        
     }
 
 }

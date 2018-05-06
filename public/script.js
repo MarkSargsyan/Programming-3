@@ -1,108 +1,4 @@
-/*function setup() {
-    createCanvas(500, 500);
-    background('#acacac');
-}
-function draw() {
-   
-    fill(0,255,0);
-    ellipse(random([0],[500]),random([0],[500]) ,random([8],[100]));
-  
 
-
-}*/
-/*
-var matrix = [
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0],
-        [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
-        [0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
-        [0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0],
-        [0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0],
-        [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
-        [0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0]
-    ];
-
-function setup() {
-    createCanvas(500, 500);
-    background('#acacac');
-}
-function draw() {
-    for(var y = 0; y < matrix.length; y++){
-   for(var x = 0; x < matrix[y].length; x++){
-       if(matrix[y][x] == 1){
-           fill(0,255,0);
-    ellipse(x*8,y*8,8,8);
-
-       }
-   }
-}
-}*/
-// var matrix = [
-//     [0, 0, 1, 0, 0],
-//     [1, 0, 0, 0, 0],
-//     [0, 1, 0, 0, 0],
-//     [0, 0, 1, 0, 0],
-//     [1, 1, 0, 0, 0],
-//     [1, 1, 0, 0, 0],
-//     [1, 1, 0, 0, 0]
-// ];
-// var side = 120;
-// var grassArr = [];
-
-
-// function setup() {
-//     frameRate(1);
-//     createCanvas(matrix[0].length * side, matrix.length * side);
-//     background('#acacac');
-//     //     var xot = new Grass(1, 2);
-//     //     var datarkVandakner = xot.yntrelVandak(0);
-//     //     console.log(datarkVandakner);
-//     // }
-
-//     for (var y = 0; y < matrix.length; y++) {
-//         for (var x = 0; x < matrix[y].length; x++) {
-//             if (matrix[y][x] == 1) {
-//                 var xot = new Grass(x, y);
-//                 grassArr.push(xot);
-//             }
-//         }
-//         console.log(grassArr);
-//     }
-// }
-
-
-// function draw() {
-
-//     for (var y = 0; y < matrix.length; y++) {
-//         for (var x = 0; x < matrix[y].length; x++) {
-
-//             if (matrix[y][x] == 1) {
-//                 fill("green");
-//                 rect(x * side, y * side, side, side);
-//             }
-//             else if (matrix[y][x] == 0) {
-//                 fill("#acacac");
-//                 rect(x * side, y * side, side, side);
-//             }
-//         }
-//     }
-//     for (var i in grassArr) {
-//         grassArr[i].bazmanal();
-
-//     }
-// }
 
 var matrix = [
     [1, 1, 1, 4, 4, 4, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -176,20 +72,29 @@ function setup() {
                 grassArr.push(xot);
             }
             else if (matrix[y][x] == 2) {
-                var xotaker = new Xotaker(x, y);
+                var xotakerser = (Math.round(Math.random())) / 2
+                var xotaker = new Xotaker(x, y, xotakerser);
                 xotakerArr.push(xotaker);
+                matrix[y][x] += xotakerser
             }
             else if (matrix[y][x] == 3) {
-                var gishatich = new Gishatich(x, y);
+                var gishatichser = (Math.round(Math.random())) / 2
+                var gishatich = new Gishatich(x, y, gishatichser);
                 gishatichArr.push(gishatich);
+                matrix[y][x] += gishatichser
             }
             else if (matrix[y][x] == 4) {
-                var mard = new Mard(x, y);
+                var mardser = (Math.round(Math.random())) / 2
+                var mard = new Mard(x, y, mardser);
                 mardArr.push(mard);
+                matrix[y][x] += mardser
             }
             else if (matrix[y][x] == 5) {
-                var amenaker = new Amenaker(x, y);
+                var amenakerser = (Math.round(Math.random())) / 2
+                var amenaker = new Amenaker(x, y, amenakerser);
                 amenakerArr.push(amenaker);
+                matrix[y][x] += amenakerser
+
             }
         }
     }

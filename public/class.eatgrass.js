@@ -1,11 +1,15 @@
 class Xotaker {
 
 
-    constructor(x, y) {
+    constructor(x, y, ser) {
         this.x = x;
         this.y = y;
         this.energy = 5;
         this.directions = [];
+        this.ser = (ser == 0 ? "arakan" : "igakan")
+        if(ser == 0) {
+            this.ser = "arakan";
+         }else this.ser = "igakan";
     }
 
 
@@ -88,12 +92,7 @@ class Xotaker {
             var index = grassArr.findIndex(item => item.y === this.y && item.x === this.x);
             grassArr.splice(index,1);
             xotiQanak--;
-            //for(var i in xotakerArr){
-            //    var xotObj = xotakerArr[i];
-            //    if(xotObj.x == this.x && xotObj.y == this.y){
-            //        grassArr.splice(i,1);
-            //    }
-            //}
+        
 
         } else {
             this.sharjvel();
@@ -101,6 +100,12 @@ class Xotaker {
     }
 
     bazmanal(){
+        if(this.ser == "arakan") {
+            var vandak = random(this.yntrelVandak(2.5));
+            if(vandak) {
+                var norVandak = random(this.yntrelVandak(0));
+            }
+        }
         var norXotaker = new Xotaker(this.x, this.y);
         xotakerArr.push(norXotaker);
         matrix[this.y][this.x] = 2;
@@ -112,13 +117,7 @@ class Xotaker {
         xotakerArr.splice(index, 1);
         matrix[this.y][this.x] = 0;
 
-        //for(var i in xotakerArr){
-        //    var xotObj = xotakerArr[i];
-        //    if(xotObj.x == this.x && xotObj.y == this.y){
-        //        xotakerArr.splice(i, 1);
-        //        matrix[this.y][this.x] = 0;
-        //    }
-        //}
+        
     }
     
 }
