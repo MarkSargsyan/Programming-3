@@ -12,20 +12,40 @@ class Amenaker {
         } else this.ser = "igakan";
     }
 
-
-    stanalNorKordinatner() {
-        return super.stanalNorKordinatner();
+ stanalNorKordinatner() {
+        this.directions = [
+            [this.x - 1, this.y - 1],
+            [this.x, this.y - 1],
+            [this.x + 1, this.y - 1],
+            [this.x - 1, this.y],
+            [this.x + 1, this.y],
+            [this.x - 1, this.y + 1],
+            [this.x, this.y + 1],
+            [this.x + 1, this.y + 1]
+        ];
     }
 
 
 
 
 
+     
     yntrelVandak(ch) {
-        return super.yntrelVandak(ch)
-    } 
+        this.stanalNorKordinatner();
+        var found = [];
+        for (var i in this.directions) {
+            var x = this.directions[i][0];
+            var y = this.directions[i][1];
+            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
+                if (matrix[y][x] == ch) {
+                    found.push(this.directions[i]);
+                }
+            }
+        }
+        return found;
+    }
        
-    yntrelKerakuriVandak(xotiVandak, xotakeriVandak, gishatichiVandak, marduVandak) {
+    yntrelKerakuriVandak(xotiVandak, xotakeriVandak, gishatichiVandak, marduVandak, zombieVandak) {
         this.stanalNorKordinatner();
         var found = [];
         for (var i in this.directions) {
@@ -33,7 +53,7 @@ class Amenaker {
             var y = this.directions[i][1];
             if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
                 if (matrix[y][x] == xotiVandak || matrix[y][x] == xotakeriVandak
-                    || matrix[y][x] == gishatichiVandak || matrix[y][x] == marduVandak) {
+                    || matrix[y][x] == gishatichiVandak || matrix[y][x] == marduVandak || matrix[y][x] == zombieVandak) {
                     found.push(this.directions[i]);
                 }
             }
@@ -56,7 +76,7 @@ class Amenaker {
             this.energy--;
 
             //mahanal
-            if (this.energy == 4) {
+            if (this.energy == 0) {
                 this.mahanal();
             }
 
@@ -66,7 +86,7 @@ class Amenaker {
 
     utel() {
 
-        var patahakanVandak = random(this.yntrelKerakuriVandak(1, 2, 3, 4));
+        var patahakanVandak = random(this.yntrelKerakuriVandak(1, 2, 3, 4, 6));
         if (patahakanVandak) {
 
             if (this.energy < 5) {
@@ -76,7 +96,7 @@ class Amenaker {
             this.energy++;
 
             //bazmanal
-            if (this.energy == 20) {
+            if (this.energy == 10) {
                 this.bazmanal();
 
             } else {
