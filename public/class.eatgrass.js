@@ -6,11 +6,11 @@ class Xotaker {
         this.y = y;
         this.energy = 5;
         this.directions = [];
-        this.ser = (ser == 0 ? "arakan" : "igakan")
-        if(ser == 0) {
-            this.ser = "arakan";
-         }else this.ser = "igakan";
-    }
+    //     this.ser = (ser == 0 ? "arakan" : "igakan")
+    //     if(ser == 0) {
+    //         this.ser = "arakan";
+    //      }else this.ser = "igakan";
+     }
 
 
     stanalNorKordinatner() {
@@ -100,12 +100,12 @@ class Xotaker {
     }
 
     bazmanal(){
-        if(this.ser == "arakan") {
-            var vandak = random(this.yntrelVandak(2.5));
-            if(vandak) {
-                var norVandak = random(this.yntrelVandak(0));
-            }
-        }
+        // if(this.ser == "arakan") {
+        //     var vandak = random(this.yntrelVandak(2.5));
+        //     if(vandak) {
+        //         var norVandak = random(this.yntrelVandak(0));
+        //     }
+        // }
         var norXotaker = new Xotaker(this.x, this.y);
         xotakerArr.push(norXotaker);
         matrix[this.y][this.x] = 2;

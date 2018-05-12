@@ -6,11 +6,11 @@ class Mard {
         this.y = y;
         this.energy = 5;
         this.directions = [];
-        this.ser = (ser == 0 ? "arakan" : "igakan");
-            if(ser == 0) {
-            this.ser = "arakan";
-         }else this.ser = "igakan";
-    }
+    //     this.ser = (ser == 0 ? "arakan" : "igakan");
+    //         if(ser == 0) {
+    //         this.ser = "arakan";
+    //      }else this.ser = "igakan";
+     }
     
 
  stanalNorKordinatner() {
@@ -138,12 +138,12 @@ class Mard {
     }
 
     bazmanal(){
-         if(this.ser == "arakan") {
-            var vandak = random(this.yntrelVandak(2.5));
-            if(vandak) {
-                var norVandak = random(this.yntrelVandak(0));
-            }
-        }
+        //  if(this.ser == "arakan") {
+        //     var vandak = random(this.yntrelVandak(2.5));
+        //     if(vandak) {
+        //         var norVandak = random(this.yntrelVandak(0));
+        //     }
+        // }
         var norMard = new Mard(this.x, this.y);
         mardArr.push(norMard);
         matrix[this.y][this.x] = 4;

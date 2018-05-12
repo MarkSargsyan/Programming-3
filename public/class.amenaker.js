@@ -6,13 +6,13 @@ class Amenaker {
         this.y = y;
         this.energy = 5;
         this.directions = [];
-        this.ser = (ser == 0 ? "arakan" : "igakan");
-        if (ser == 0) {
-            this.ser = "arakan";
-        } else this.ser = "igakan";
+        //     this.ser = (ser == 0 ? "arakan" : "igakan");
+        //     if (ser == 0) {
+        //         this.ser = "arakan";
+        //     } else this.ser = "igakan";
     }
 
- stanalNorKordinatner() {
+    stanalNorKordinatner() {
         this.directions = [
             [this.x - 1, this.y - 1],
             [this.x, this.y - 1],
@@ -29,7 +29,7 @@ class Amenaker {
 
 
 
-     
+
     yntrelVandak(ch) {
         this.stanalNorKordinatner();
         var found = [];
@@ -44,7 +44,7 @@ class Amenaker {
         }
         return found;
     }
-       
+
     yntrelKerakuriVandak(xotiVandak, xotakeriVandak, gishatichiVandak, marduVandak, zombieVandak) {
         this.stanalNorKordinatner();
         var found = [];
@@ -126,14 +126,20 @@ class Amenaker {
                 gishatichArr.splice(index, 1)
             }
             //mard a kerel
-            else {
+            else if(matrix[this.y][this.x] == 4) {
                 var index = mardArr.findIndex(item => item.y === this.y && item.x === this.x);
                 mardArr.splice(index, 1);
             }
+            //zombie a kerel
+            else if(matrix[this.y][this.x] == 6) {
+                var index = zombieArr.findIndex(item => item.y === this.y && item.x === this.x);
+                zombieArr.splice(index, 1);
+            }
+            
 
             matrix[this.y][this.x] = 5;
 
-         
+
 
 
 
@@ -144,12 +150,12 @@ class Amenaker {
     }
 
     bazmanal() {
-       if(this.ser == "arakan") {
-            var vandak = random(this.yntrelVandak(2.5));
-            if(vandak) {
-                var norVandak = random(this.yntrelVandak(0));
-            }
-        }
+        //    if(this.ser == "arakan") {
+        //         var vandak = random(this.yntrelVandak(2.5));
+        //         if(vandak) {
+        //             var norVandak = random(this.yntrelVandak(0));
+        //         }
+        //     }
         var norAmenaker = new Amenaker(this.x, this.y);
         amenakerArr.push(norAmenaker);
         matrix[this.y][this.x] = 5;
@@ -160,7 +166,7 @@ class Amenaker {
         matrix[this.y][this.x] = 0;
         var index = amenakerArr.findIndex(item => item.y === this.y && item.x === this.x);
         amenakerArr.splice(index, 1);
-        
+
     }
 
 }
