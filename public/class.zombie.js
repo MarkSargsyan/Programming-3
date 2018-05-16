@@ -76,7 +76,7 @@ class Zombie {
             this.energy--;
 
             //mahanal
-            if (this.energy == -1000000000000000000000000000) {
+            if (this.energy == 0) {
                 this.mahanal();
             }
         }

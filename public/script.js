@@ -61,9 +61,25 @@ var mardArr = [];
 var amenakerArr = [];
 var xotiQanak = 0;
 var zombieArr = [];
+var exanak = "amar";
+var exanakCount = 0;
+var timeLimitForSeasons = 30;
+function kaycak() {
+    location.reload();
+} 
+
+
 
 function setup() {
-    frameRate(60);
+
+    
+    if (exanak === "dzmer" || exanak === "ashun"){
+        frameRate(0.5);
+    }
+    else if (exanak === "amar" || exanak === "garun"){
+        frameRate(1);
+    }
+    
     createCanvas(matrix[0].length * side, matrix.length * side);
     background("#767676");
     for (var y = 0; y < matrix.length; y++) {
@@ -109,6 +125,36 @@ function setup() {
 }
 
 function draw() {
+	if (exanak === "dzmer" || exanak === "ashun"){
+if (matrix[y][x] = 0){
+    fill("blue");
+     stroke(20);
+    rect(x * side, y * side, side, side);
+}    
+background("blue")
+		exanakCount += 2;
+		if(exanakCount >= timeLimitForSeasons){
+			if(exanak === "ashun")
+				exanak = "dzmer";
+			else{
+				exanak = "garun";
+				frameRate(1);
+			}
+			exanakCount = 0;
+		}
+    }
+    else if (exanak === "amar" || exanak === "garun"){
+       exanakCount += 1;
+		if(exanakCount >= timeLimitForSeasons){
+			if(exanak === "garun")
+				exanak = "amar";
+			else{
+				exanak = "ashun";
+				frameRate(0.5);
+			}
+			exanakCount = 0;
+		}
+    }
     xotiQanak = 0;
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
