@@ -1,4 +1,4 @@
-class Amenaker {
+class Amenaker  {
 
 
     constructor(x, y, ser) {
