@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 module.exports=class zombie extends global.LivingCreature {
     constructor(x, y) {
         super(x, y);
@@ -24,257 +23,125 @@ module.exports=class zombie extends global.LivingCreature {
     }
 
 
-
-
-
-    yntrelKerakuriVandak(marduVandak, gishatichivandak) {
-        this.stanalNorKordinatner();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == marduVandak || matrix[y][x] == gishatichiVandak) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
-    }
-
-    
-
     sharjvel() {
+        var norVandak = this.getrandom(this.yntrelVandak(0));
 
-        var patahakanVandak = random(this.yntrelVandak(0));
-        if (patahakanVandak) {
+        if (norVandak) {
             matrix[this.y][this.x] = 0;
-            this.x = patahakanVandak[0];
-            this.y = patahakanVandak[1];
-            matrix[this.y][this.x] = 6;
-            if (this.energy > 7) {
-                this.energy = 7;
-            }
+            matrix[norVandak[1]][norVandak[0]] = 6;
+            this.x = norVandak[0];
+            this.y = norVandak[1];
             this.energy--;
 
-            //mahanal
-            if (this.energy == 0) {
+            if (this.energy <= 0) {
                 this.mahanal();
             }
         }
     }
 
-    utel() {
 
-        var patahakanVandak = random(this.yntrelKerakuriVandak(4, 3));
-        if (patahakanVandak) {
-
-            if (this.energy < 7) {
-                this.energy = 7;
-            }
-
-            this.energy++;
-
-            //bazmanal
-            if (this.energy == 8) {
-                this.bazmanal();
-
-            } else {
-                matrix[this.y][this.x] = 0;
-            }
-
-            matrix[this.y][this.x] = 0;
-            this.x = patahakanVandak[0];
-            this.y = patahakanVandak[1];
-
-            //mard a kerel
-            if (matrix[this.y][this.x] == 4) {
-                var index = mardArr.findIndex(item => item.y === this.y && item.x === this.x);
-                mardArr.splice(index, 1);
-            }
-            //gishatich a kerel
-            else if (matrix[this.y][this.x] == 3) {
-                var index = gishatichArr.findIndex(item => item.y === this.y && item.x === this.x);
-                gishatichArr.splice(index, 1)
-            }
-
-            matrix[this.y][this.x] = 6;
-
-        } else {
-            this.sharjvel();
-        }
-    }
-    bazmanal() {
-        //if (this.ser == "arakan") {
-        //    var vandak = random(this.yntrelVandak(2.5));
-          //  if (vandak) {
-            //    var norVandak = random(this.yntrelVandak(0));
-            //}
-       // }
-        var norZombie = new Zombie(this.x, this.y);
-        zombieArr.push(norZombie);
-        matrix[this.y][this.x] = 6;
-        this.energy = 7;
-    }
 
 
     mahanal() {
-
         matrix[this.y][this.x] = 0;
-        var index = zombieArr.findIndex(item => item.y === this.y && item.x === this.x);
-        zombieArr.splice(index, 1);
-
-    }
-
-}
-
-=======
-class Zombie {
-
-
-    constructor(x, y, ser) {
-        this.x = x;
-        this.y = y;
-        this.energy = 7;
-        this.directions = [];
-    //     this.ser = (ser == 0 ? "arakan" : "igakan");
-    //     if (ser == 0) {
-    //         this.ser = "arakan";
-    //     } else this.ser = "igakan";
-     }
-
-
-
-    stanalNorKordinatner() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-    }
-
-
-
-
-    yntrelVandak(ch) {
-        this.stanalNorKordinatner();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == ch) {
-                    found.push(this.directions[i]);
-                }
+        for (var a in zombieArr) {
+            if (this.x == zombieArr[a].x && this.y == zombieArr[a].y) {
+                zombieArr.splice(a, 1);
+                break;
             }
-        }
-        return found;
-    }
 
-    yntrelKerakuriVandak(marduVandak, gishatichivandak) {
-        this.stanalNorKordinatner();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == marduVandak || matrix[y][x] == gishatichiVandak) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
-    }
 
-    
-
-    sharjvel() {
-
-        var patahakanVandak = random(this.yntrelVandak(0));
-        if (patahakanVandak) {
-            matrix[this.y][this.x] = 0;
-            this.x = patahakanVandak[0];
-            this.y = patahakanVandak[1];
-            matrix[this.y][this.x] = 6;
-            if (this.energy > 7) {
-                this.energy = 7;
-            }
-            this.energy--;
-
-            //mahanal
-            if (this.energy == 0) {
-                this.mahanal();
-            }
         }
     }
 
     utel() {
+        var norVandak_amenaker=this.getrandom(this.yntrelVandak(5));
 
-        var patahakanVandak = random(this.yntrelKerakuriVandak(4, 3));
-        if (patahakanVandak) {
+        var norVandak_mard = this.getrandom(this.yntrelVandak(4));
 
-            if (this.energy < 7) {
-                this.energy = 7;
-            }
+        var norVandak_gishatich = this.getrandom(this.yntrelVandak(3));
 
-            this.energy++;
+        var norVandak_xotaker = this.getrandom(this.yntrelVandak(2));
+        
+        var norVandak_xot = this.getrandom(this.yntrelVandak(1));
 
-            //bazmanal
-            if (this.energy == 8) {
-                this.bazmanal();
 
-            } else {
-                matrix[this.y][this.x] = 0;
-            }
-
+        if (norVandak_amenaker) {
             matrix[this.y][this.x] = 0;
-            this.x = patahakanVandak[0];
-            this.y = patahakanVandak[1];
+            matrix[norVandak_amenaker[1]][norVandak_amenaker[0]] = 6;
+            this.x = norVandak_amenaker[0];
+            this.y = norVandak_amenaker[1];
+            this.energy+=5;
 
-            //mard a kerel
-            if (matrix[this.y][this.x] == 4) {
-                var index = mardArr.findIndex(item => item.y === this.y && item.x === this.x);
-                mardArr.splice(index, 1);
+            for (var a in amenakerArr) {
+                if (this.x == amenakerArr[a].x && this.y == amenakerArr[a].y) {
+                    amenakerArr.splice(a, 1);
+                    break;
+                }
             }
-            //gishatich a kerel
-            else if (matrix[this.y][this.x] == 3) {
-                var index = gishatichArr.findIndex(item => item.y === this.y && item.x === this.x);
-                gishatichArr.splice(index, 1)
+        }
+        if (norVandak_mard) {
+            matrix[this.y][this.x] = 0;
+            matrix[norVandak_mard[1]][norVandak_mard[0]] = 6;
+            this.x = norVandak_mard[0];
+            this.y = norVandak_mard[1];
+            this.energy+=4;
+
+            for (var a in mardArr) {
+                if (this.x == mardArr[a].x && this.y == mardArr[a].y) {
+                    mardArr.splice(a, 1);
+                    break;
+                }
             }
+        }
 
-            matrix[this.y][this.x] = 6;
+        else if (norVandak_gishatich) {
+            matrix[this.y][this.x] = 0;
+            matrix[norVandak_gishatich[1]][norVandak_gishatich[0]] = 6;
+            this.x = norVandak_gishatich[0];
+            this.y = norVandak_gishatich[1];
+            this.energy+=3;
+            
+            for (var a in gishatichArr) {
+                if (this.x == gishatichArr[a].x && this.y == gishatichArr[a].y) {
+                    gishatichArr.splice(a, 1);
+                    break;
+                }
+            }
+        }
 
-        } else {
+        else if (norVandak_xotaker) {
+            matrix[this.y][this.x] = 0;
+            matrix[norVandak_xotaker[1]][norVandak_xotaker[0]] = 6;
+            this.x = norVandak_xotaker[0];
+            this.y = norVandak_xotaker[1];
+            this.energy+=2;
+            
+            for (var a in xotakerArr) {
+                if (this.x == xotakerArr[a].x && this.y == xotakerArr[a].y) {
+                    xotakerArr.splice(a, 1);
+                    break;
+                }
+            }
+        }
+
+        else if (norVandak_xot) {
+            matrix[this.y][this.x] = 0;
+            matrix[norVandak_xot[1]][norVandak_xot[0]] = 6;
+            this.x = norVandak_xot[0];
+            this.y = norVandak_xot[1];
+            this.energy++;
+           
+
+            for (var a in grassArr) {
+                if (this.x == grassArr[a].x && this.y == grassArr[a].y) {
+                    grassArr.splice(a, 1);
+                    break;
+                }
+            }
+        }
+        else {
             this.sharjvel();
         }
     }
-    bazmanal() {
-        //if (this.ser == "arakan") {
-        //    var vandak = random(this.yntrelVandak(2.5));
-          //  if (vandak) {
-            //    var norVandak = random(this.yntrelVandak(0));
-            //}
-       // }
-        var norZombie = new Zombie(this.x, this.y);
-        zombieArr.push(norZombie);
-        matrix[this.y][this.x] = 6;
-        this.energy = 7;
-    }
-
-
-    mahanal() {
-
-        matrix[this.y][this.x] = 0;
-        var index = zombieArr.findIndex(item => item.y === this.y && item.x === this.x);
-        zombieArr.splice(index, 1);
-
-    }
-
 }
-
->>>>>>> a87e1409dcc89170de0f20ce6cb6f97ec8720237
