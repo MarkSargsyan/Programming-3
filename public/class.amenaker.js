@@ -1,16 +1,11 @@
-class Amenaker {
+module.exports=class amenaker extends global.LivingCreature {
+    constructor(x, y) {
+        super(x, y);
+        this.energy = 10;
+        this.qayler = 3;
+    } 
 
 
-    constructor(x, y, ser) {
-        this.x = x;
-        this.y = y;
-        this.energy = 5;
-        this.directions = [];
-        //     this.ser = (ser == 0 ? "arakan" : "igakan");
-        //     if (ser == 0) {
-        //         this.ser = "arakan";
-        //     } else this.ser = "igakan";
-    }
 
     stanalNorKordinatner() {
         this.directions = [
@@ -21,10 +16,26 @@ class Amenaker {
             [this.x + 1, this.y],
             [this.x - 1, this.y + 1],
             [this.x, this.y + 1],
-            [this.x + 1, this.y + 1]
-        ];
-    }
+            [this.x + 1, this.y + 1],
 
+            [this.x - 2, this.y - 2],
+            [this.x - 1, this.y - 2],
+            [this.x, this.y - 2],
+            [this.x + 1, this.y - 2],
+            [this.x + 2, this.y - 2],
+            [this.x - 2, this.y - 1],
+            [this.x + 2, this.y - 1],
+            [this.x - 2, this.y],
+            [this.x + 2, this.y],
+            [this.x - 2, this.y + 1],
+            [this.x + 2, this.y + 1],
+            [this.x - 2, this.y + 2],
+            [this.x - 1, this.y + 2],
+            [this.x, this.y + 2],
+            [this.x + 1, this.y + 2],
+            [this.x + 2, this.y + 2]
+        ]
+    }
 
 
 
@@ -32,18 +43,9 @@ class Amenaker {
 
     yntrelVandak(ch) {
         this.stanalNorKordinatner();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == ch) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
+        return super.yntrelVandak(ch);
     }
+
 
     yntrelKerakuriVandak(xotiVandak, xotakeriVandak, gishatichiVandak, marduVandak, zombieVandak) {
         this.stanalNorKordinatner();
@@ -65,6 +67,7 @@ class Amenaker {
     sharjvel() {
 
         var patahakanVandak = random(this.yntrelVandak(0));
+        this.qayler++
         if (patahakanVandak) {
             matrix[this.y][this.x] = 0;
             this.x = patahakanVandak[0];
@@ -149,24 +152,73 @@ class Amenaker {
         }
     }
 
-    bazmanal() {
-        //    if(this.ser == "arakan") {
-        //         var vandak = random(this.yntrelVandak(2.5));
-        //         if(vandak) {
-        //             var norVandak = random(this.yntrelVandak(0));
-        //         }
-        //     }
-        var norAmenaker = new Amenaker(this.x, this.y);
-        amenakerArr.push(norAmenaker);
-        matrix[this.y][this.x] = 5;
-        this.energy = 5;
-    }
+
+   
     mahanal() {
-
         matrix[this.y][this.x] = 0;
-        var index = amenakerArr.findIndex(item => item.y === this.y && item.x === this.x);
-        amenakerArr.splice(index, 1);
+
+        for (var a in amenakerArr) {
+            if (this.x == amenakerArr[a].x && this.y == amenakerArr[a].y) {
+                amenakerArr.splice(a, 1);
+                break;
+            }
+        }
+
+        for (var d = 0; d < this.directions.length; d++) {
+
+            var x = this.directions[d][0];
+            var y = this.directions[d][1];
+
+            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
+                matrix[this.directions[d][1]][this.directions[d][0]] = 0;
+            }
+
+            for (var a in mardArr) {
+                if (x == mardArr[a].x && y == mardArr[a].y) {
+                    mardArr.splice(a, 1);
+                    break;
+                }
+            }
+            for (var a in gishatichArr) {
+                if (x == gishatichArr[a].x && y == gishatichArr[a].y) {
+                    gishatichArr.splice(a, 1);
+                    break;
+                }
+            }
+            for (var a in xotakerArr) {
+                if (x == xotakerArr[a].x && y == xotakerArr[a].y) {
+                    xotakerArr.splice(a, 1);
+                    break;
+                }
+            }
+            for (var a in grassArr) {
+                if (x == grassArr[a].x && y == grassArr[a].y) {
+                    grassArr.splice(a, 1);
+                    break;
+                }
+            }
+            for (var a in amenakerArr) {
+                if (x == amenakerArr[a].x && y == amenakerArr[a].y) {
+                    amenakerArr.splice(a, 1);
+                    break;
+                }
+            }
+
+
+        }
+
+        if (this.x - 2 >= 0 && this.x - 2 < matrix[0].length && this.y - 2 >= 0 && this.y - 2 < matrix.length && matrix[this.y - 2][this.x - 2] == 0) {
+            matrix[this.y - 2][this.x - 2] = 3;
+            gishatichArr.push(new gishatich(this.x - 2, this.y - 2));
+        }
+
+        if (this.x + 2 >= 0 && this.x + 2 < matrix[0].length && this.y + 2 >= 0 && this.y + 2 < matrix.length && matrix[this.y+2][this.x+2]==0) {
+            matrix[this.y + 2][this.x + 2] = 2;
+            xotakerArr.push(new xotaker(this.x + 2, this.y + 2));
+        }
+
 
     }
+
 
 }

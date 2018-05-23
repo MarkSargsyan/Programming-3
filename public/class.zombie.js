@@ -1,18 +1,8 @@
-class Zombie {
-
-
-    constructor(x, y, ser) {
-        this.x = x;
-        this.y = y;
-        this.energy = 7;
-        this.directions = [];
-    //     this.ser = (ser == 0 ? "arakan" : "igakan");
-    //     if (ser == 0) {
-    //         this.ser = "arakan";
-    //     } else this.ser = "igakan";
-     }
-
-
+module.exports=class zombie extends global.LivingCreature {
+    constructor(x, y) {
+        super(x, y);
+        this.energy = 20;
+    }
 
     stanalNorKordinatner() {
         this.directions = [
@@ -24,26 +14,17 @@ class Zombie {
             [this.x - 1, this.y + 1],
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
-        ];
+        ]
     }
-
-
-
 
     yntrelVandak(ch) {
         this.stanalNorKordinatner();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == ch) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
+        return super.yntrelVandak(ch);
     }
+
+
+
+
 
     yntrelKerakuriVandak(marduVandak, gishatichivandak) {
         this.stanalNorKordinatner();
@@ -76,7 +57,7 @@ class Zombie {
             this.energy--;
 
             //mahanal
-            if (this.energy == -1000000000000000000000000000) {
+            if (this.energy == 0) {
                 this.mahanal();
             }
         }

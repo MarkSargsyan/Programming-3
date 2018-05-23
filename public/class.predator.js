@@ -1,19 +1,13 @@
-class Gishatich {
-
-
+module.exports = class gishatich extends global.LivingCreature {
     constructor(x, y, ser) {
-        this.x = x;
-        this.y = y;
-        this.energy = 5;
-        this.directions = [];
-    //     this.ser = (ser == 0 ? "arakan" : "igakan");
-    //     if (ser == 0) {
-    //         this.ser = "arakan";
-    //     } else this.ser = "igakan";
-     }
+        super(x, y);
+        this.energy = 1;
+        this.cnel_amenaker = 0;
+        this.ser = (ser == 0 ? "arakan" : "igakan");
 
+    }
 
-  stanalNorKordinatner() {
+    stanalNorKordinatner() {
         this.directions = [
             [this.x - 1, this.y - 1],
             [this.x, this.y - 1],
@@ -23,7 +17,12 @@ class Gishatich {
             [this.x - 1, this.y + 1],
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
-        ];
+        ]
+    }
+
+    yntrelVandak(ch) {
+        this.stanalNorKordinatner();
+        return super.yntrelVandak(ch);
     }
 
 yntrelKerakuriVandak(xotakeriVandak, marduVandak, xotiVandak) {
@@ -43,20 +42,7 @@ yntrelKerakuriVandak(xotakeriVandak, marduVandak, xotiVandak) {
 }
 
 
-    yntrelVandak(ch) {
-        this.stanalNorKordinatner();
-        var found = [];
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == ch) {
-                    found.push(this.directions[i]);
-                }
-            }
-        }
-        return found;
-    }
+   
 
 
 
@@ -135,18 +121,24 @@ utel() {
         this.sharjvel();
     }
 }
+bazmanal() {
+    if (this.ser == "arakan") {
+        var predator = this.getrandom(this.yntrelVandak(3.5));
+    }
+    else {
+        var predator = this.getrandom(this.yntrelVandak(3));
+    }
+    var norVandak = this.getrandom(this.yntrelVandak(0));
 
-bazmanal(){
-//    if(this.ser == "arakan") {
-//             var vandak = random(this.yntrelVandak(2.5));
-//             if(vandak) {
-//                 var norVandak = random(this.yntrelVandak(0));
-//             }
-//         }
-    var norGishatich = new Gishatich(this.x, this.y);
-    gishatichArr.push(norGishatich);
-    matrix[this.y][this.x] = 3;
-    this.energy = 5;
+    if (norVandak && predator) {
+        var r = (Math.round(Math.random())) / 2;
+        var norGishatich = new gishatich(norVandak[0], norVandak[1], r);
+        gishatichArr.push(norGishatich);
+        matrix[norVandak[1]][norVandak[0]] = 3;
+        matrix[norVandak[1]][norVandak[0]] += r;
+        this.energy /= 2;
+        cnvac_gishatich++;
+    }
 }
 mahanal(){
     matrix[this.y][this.x] = 0;
