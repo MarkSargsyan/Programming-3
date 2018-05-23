@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var express = require("express");
 var app = express();
 var server = require("http").Server(app);
@@ -285,3 +286,17 @@ io.on('connection', function (socket) {
     }
 
 });
+=======
+var express = require("express");
+var app = express();
+
+app.use(express.static("public"));
+
+app.get("/", function(req, res){
+   res.redirect('index.html');
+});
+
+app.listen(3000, function(){
+   console.log("Example is running on port 3000");
+});
+>>>>>>> a87e1409dcc89170de0f20ce6cb6f97ec8720237
