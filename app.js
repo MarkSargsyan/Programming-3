@@ -39,8 +39,75 @@ global.zombie = require("./public/class.zombie.js");
 //klientin uxarkelu hamar
 var arr = [];
 //////////////////////////////////////////////////////////////////////////////////////
-
+//kaycak
 io.on('connection', function (socket) {
+    setInterval(function () {
+        for (var i = 0; i < n; i++) {
+            matrix[i] = [];
+            for (var j = 0; j < m; j++) {
+                matrix[i][j] = Math.round(Math.random() * 4);
+            }
+        }
+//////kaycak
+        matrix[10][10] = 5;
+        matrix[20][20] = 5;
+        matrix[30][30] = 5;
+        matrix[12][12] = 5;
+        matrix[21][21] = 5;
+        matrix[26][29] = 5;
+
+        matrix[5][30] = 6;
+        matrix[30][5] = 6;
+
+        cnvac_xot = 0;
+        cnvac_xotaker = 0;
+        cnvac_gishatich = 0;
+        cnvac_mard = 0;
+
+        grassArr = [];
+        xotakerArr = [];
+        gishatichArr = [];
+        mardArr = [];
+        amenakerArr = [];
+        zombieArr = [];
+
+        for (var y = 0; y < matrix.length; y++) {
+            for (var x = 0; x < matrix[y].length; x++) {
+                if (matrix[y][x] == 1) {
+                    grassArr.push(new Grass(x, y));
+                    cnvac_xot++;
+                }
+                else if (matrix[y][x] == 2) {
+                    var r = (Math.round(Math.random())) / 2;
+                    xotakerArr.push(new xotaker(x, y, r));
+                    matrix[y][x] += r;
+                    cnvac_xotaker++;
+                }
+                else if (matrix[y][x] == 3) {
+                    var t = (Math.round(Math.random())) / 2;
+                    gishatichArr.push(new gishatich(x, y, t));
+                    matrix[y][x] += t;
+                    cnvac_gishatich++;
+                }
+                else if (matrix[y][x] == 4) {
+                    var f = (Math.round(Math.random())) / 2;
+                    mardArr.push(new mard(x, y, f));
+                    matrix[y][x] += f;
+                    cnvac_mard++;
+
+                }
+                else if (matrix[y][x] == 5) {
+                    amenakerArr.push(new amenaker(x, y));
+                }
+                else if (matrix[y][x] == 6) {
+                    zombieArr.push(new zombie(x, y));
+                }
+            }
+        }
+        exanak = "garun";
+
+    }, 60000);
+
     for (var i = 0; i < n; i++) {
         matrix[i] = [];
         for (var j = 0; j < m; j++) {
@@ -58,10 +125,10 @@ io.on('connection', function (socket) {
     matrix[5][30] = 6;
     matrix[30][5] = 6;
 
-    global.cnvac_xot=0;
-    global.cnvac_xotaker=0;
-    global.cnvac_gishatich=0;
-    global.cnvac_mard=0;
+    global.cnvac_xot = 0;
+    global.cnvac_xotaker = 0;
+    global.cnvac_gishatich = 0;
+    global.cnvac_mard = 0;
 
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
@@ -114,7 +181,7 @@ io.on('connection', function (socket) {
     ////////////////////////////////////////////////////////////////////////////////
 
     var frame = 0;
-    
+
     setInterval(function () {
         for (var i in grassArr) {
             if (exanak != "dzmer") {
@@ -278,8 +345,8 @@ io.on('connection', function (socket) {
 
     function statistika() {
         var file = "data.json";
-        var text = "xoti qanak " + grassArr.length + "\nxotakeri qanak " + xotakerArr.length + "\ngishatichi qanak " + gishatichArr.length + "\nmardu qanak " + mardArr.length + "\namenakeri qanak " + amenakerArr.length + "\nzombiei qanak " 
-        + zombieArr.length+"\n\ncnvac xot "+cnvac_xot+"\ncnvac xotaker "+cnvac_xotaker+"\ncnvac gishatich "+cnvac_gishatich+"\ncnvac mard "+cnvac_mard;
+        var text = "xoti qanak " + grassArr.length + "\nxotakeri qanak " + xotakerArr.length + "\ngishatichi qanak " + gishatichArr.length + "\nmardu qanak " + mardArr.length + "\namenakeri qanak " + amenakerArr.length + "\nzombiei qanak "
+            + zombieArr.length + "\n\ncnvac xot " + cnvac_xot + "\ncnvac xotaker " + cnvac_xotaker + "\ncnvac gishatich " + cnvac_gishatich + "\ncnvac mard " + cnvac_mard;
 
         fs.writeFileSync(file, text);
     }
