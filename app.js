@@ -26,6 +26,9 @@ global.gishatichArr = [];
 global.mardArr = [];
 global.amenakerArr = [];
 global.zombieArr = [];
+global.exanak = "garun";
+global.exanaknerArr = ["amar", "ashun", "dzmer", "garun"];
+global.i = 0;
 
 global.LivingCreature = require("./public/class.super.js");
 global.Grass = require("./public/class.grass.js");
@@ -41,29 +44,38 @@ var arr = [];
 //////////////////////////////////////////////////////////////////////////////////////
 
 io.on('connection', function (socket) {
-    for (var i = 0; i < n; i++) {
-        matrix[i] = [];
-        for (var j = 0; j < m; j++) {
-            matrix[i][j] = Math.round(Math.random() * 4);
-        }
-    }
+	///////veracnund
+	function initialize(){
+		for (var i = 0; i < n; i++) {
+			matrix[i] = [];
+			for (var j = 0; j < m; j++) {
+				matrix[i][j] = Math.round(Math.random() * 4);
+            }
+     ///////veracnund(project restart).
+		}
+		matrix[10][10] = 5;
+		matrix[20][20] = 5;
+		matrix[30][30] = 5;
+		matrix[12][12] = 5;
+		matrix[21][21] = 5;
+		matrix[26][29] = 5;
 
-    matrix[10][10] = 5;
-    matrix[20][20] = 5;
-    matrix[30][30] = 5;
-    matrix[12][12] = 5;
-    matrix[21][21] = 5;
-    matrix[26][29] = 5;
+		matrix[5][30] = 6;
+		matrix[30][5] = 6;
 
-    matrix[5][30] = 6;
-    matrix[30][5] = 6;
+		cnvac_xot=0;
+		cnvac_xotaker=0;
+		cnvac_gishatich=0;
+		cnvac_mard=0;
+		
+		grassArr = [];
+		xotakerArr = [];
+		gishatichArr = [];
+		mardArr = [];
+		amenakerArr = [];
+		zombieArr = [];
 
-    global.cnvac_xot=0;
-    global.cnvac_xotaker=0;
-    global.cnvac_gishatich=0;
-    global.cnvac_mard=0;
-
-    for (var y = 0; y < matrix.length; y++) {
+		for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 1) {
                 grassArr.push(new Grass(x, y));
@@ -95,27 +107,32 @@ io.on('connection', function (socket) {
                 zombieArr.push(new zombie(x, y));
             }
         }
-    }
-
-    ///////////////////////////////////////////////////////////////////////////////////
-    var exanaknerArr = ["amar", "ashun", "dzmer", "garun"];
-    var i = 0;
-    global.exanak = "garun";
+		}
+		exanak = "garun";
+	}
+	setTimeout(function(){
+		initialize();		
+	},30000);
+	
+	initialize();
+    
+    //EXANAK
     function exanakiPopoxutyun() {
-        exanak = exanaknerArr[i];
-        //console.log(exanak);
-        i++;
+			exanak = exanaknerArr[i];
+			console.log(exanak);
+			i++;
 
-        if (i >= 4) {
-            i = 0;
-        }
-    }
-    setInterval(exanakiPopoxutyun, 5000);
-    ////////////////////////////////////////////////////////////////////////////////
+			if (i >= 4) {
+				i = 0;
+			}
+		}
+	setInterval(exanakiPopoxutyun,3000);
+    //EXANAK
 
     var frame = 0;
     
-    setInterval(function () {
+    setInterval(function process() {
+				
         for (var i in grassArr) {
             if (exanak != "dzmer") {
                 grassArr[i].bazmanal();
@@ -146,13 +163,18 @@ io.on('connection', function (socket) {
             statistika();
         }
 
-        //uxarkel klientin
+        //klient
         arr[0] = matrix;
         arr[1] = exanak;
         io.sockets.emit("a", arr);
-        ////////////////////////////////////////////////////////////////////////
-    }, 400);
-
+        //
+		var count = xotakerArr.length + gishatichArr.length + mardArr.length + amenakerArr.length + zombieArr.length;
+		if (count < 3) {
+            io.sockets.emit("gameOver");
+            statistika();
+            clearInterval(process);
+        }
+    }, 1000);
 
 
     function paytyun() {
@@ -224,7 +246,7 @@ io.on('connection', function (socket) {
                 break;
             }
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////
+        //
 
         for (var d = 0; d < paytyunDirections.length; d++) {
 
@@ -274,8 +296,7 @@ io.on('connection', function (socket) {
 
     }
 
-    //////////////////////////////////////////////////////////////////////////
-
+    /////
     function statistika() {
         var file = "data.json";
         var text = "xoti qanak " + grassArr.length + "\nxotakeri qanak " + xotakerArr.length + "\ngishatichi qanak " + gishatichArr.length + "\nmardu qanak " + mardArr.length + "\namenakeri qanak " + amenakerArr.length + "\nzombiei qanak " 
